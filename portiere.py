@@ -8,5 +8,5 @@ class portiere(calciatore):
         self.golSubiti=golSubiti
 
 
-    def toString(self):
-        return self.nome + " " + self.squadra + " " + self.ruolo
+    def __str__(self):
+        return self.nome + " " + self.squadra + " " + self.ruolo + " " + str(self.golSubiti)

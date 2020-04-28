@@ -1,4 +1,4 @@
-class calciatore:
+class calciatore():
 
     def __init__(self,nome,squadra,ruolo,presenze=0,fv=0,mv=0):
         self.nome=nome
@@ -10,5 +10,5 @@ class calciatore:
         self.venduto=False
 
 
-    def toString(self):
+    def __str__(self):
         return self.nome + " " + self.squadra

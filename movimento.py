@@ -10,5 +10,5 @@ class movimento(calciatore):
         self.gialli=gialli
         self.rossi=rossi
 
-    def toString(self):
-        return self.nome + " " + self.squadra 
+    def __str__(self):
+        return self.nome + " " + self.squadra
