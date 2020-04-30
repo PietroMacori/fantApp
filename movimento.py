@@ -1,9 +1,9 @@
-from calciatore import *
+from Calciatore import *
 
-class movimento(calciatore):
+class Movimento(Calciatore):
 
     def __init__(self,nome,squadra,ruolo,presenze,fv,mv,gol,assist,rigori,gialli,rossi):
-        calciatore.__init__(self,nome,squadra,ruolo,presenze,fv,mv)
+        Calciatore.__init__(self,nome,squadra,ruolo,presenze,fv,mv)
         self.gol=gol
         self.assist=assist
         self.rigori=rigori

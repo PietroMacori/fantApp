@@ -1,9 +1,9 @@
-from calciatore import *
+from Calciatore import *
 
-class portiere(calciatore):
+class Portiere(Calciatore):
 
     def __init__(self,nome,squadra,ruolo,presenze,fv,mv, rigoriParati, golSubiti):
-        calciatore.__init__(self,nome,squadra,ruolo,presenze,fv,mv)
+        Calciatore.__init__(self,nome,squadra,ruolo,presenze,fv,mv)
         self.rigoriParati=rigoriParati
         self.golSubiti=golSubiti
 

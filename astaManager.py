@@ -1,15 +1,17 @@
 import xlrd
-from calciatore import *
-from movimento import *
-from portiere import *
+from Calciatore import *
+from Movimento import *
+from Portiere import *
+from Partecipante import *
 
-class astaManager():
+class AstaManager():
+    def __init__(self):
+        self.listaPartecipanti={}
+        self.listaGiocatori={}
 
     def loadPlayer(self,path1,path2):
         listaVecchia=[]
-        listaCompleta=[]
         listaNuova={}
-
         wb2=xlrd.open_workbook(path2)
         sheet2=wb2.sheet_by_index(0)
         sheet2.cell_value(0,0)
@@ -52,10 +54,10 @@ class astaManager():
                     pass
 
             if ruolo=="P":
-                newc=portiere(nome,squadra,ruolo,presenze,fv,mv,rigoriParati,golSubiti)
+                newc=Portiere(nome,squadra,ruolo,presenze,fv,mv,rigoriParati,golSubiti)
                 listaVecchia.insert(i,newc)
             else:
-                newc=movimento(nome,squadra,ruolo,presenze,fv,mv,gol,assist,rigoriCalciati,gialli,rossi)
+                newc=Movimento(nome,squadra,ruolo,presenze,fv,mv,gol,assist,rigoriCalciati,gialli,rossi)
                 listaVecchia.insert(i,newc)
 
 
@@ -73,10 +75,10 @@ class astaManager():
                     squadra=sheet.cell_value(i,j)
 
             if ruolo=="P":
-                newc=portiere(nome,squadra,ruolo,0,0,0,0,0)
+                newc=Portiere(nome,squadra,ruolo,0,0,0,0,0)
                 listaNuova[nome]=newc
             else:
-                newc=movimento(nome,squadra,ruolo,0,0,0,0,0,0,0,0)
+                newc=Movimento(nome,squadra,ruolo,0,0,0,0,0,0,0,0)
                 listaNuova[nome]=newc
 
         #Remove players that are no more in Serie A and update teams
@@ -84,6 +86,18 @@ class astaManager():
             if listaNuova.has_key(listaVecchia[i].nome)==True:
                 gioc=listaNuova[listaVecchia[i].nome]
                 listaVecchia[i].squadra=gioc.squadra
-                listaCompleta.append(listaVecchia[i])
+                self.listaGiocatori[gioc.nome]=listaVecchia[i]
 
-        return listaCompleta
+
+        return self.listaGiocatori
+
+
+    def addPlayer(self, nomePartecipante):
+        self.listaPartecipanti[nomePartecipante]=Partecipante(nomePartecipante)
+
+    def partecipanti(self):
+        return self.listaPartecipanti
+
+    def aquista(self, partecipante,calciatore, crediti):
+        partecipante.addPlayer(calciatore,crediti)
+        calciatore.calciatoreVenduto(partecipante)
