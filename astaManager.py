@@ -83,7 +83,7 @@ class AstaManager():
 
         #Remove players that are no more in Serie A and update teams
         for i in range(len(listaVecchia)):
-            if listaNuova.has_key(listaVecchia[i].nome)==True:
+            if listaVecchia[i].nome in listaNuova==True:
                 gioc=listaNuova[listaVecchia[i].nome]
                 listaVecchia[i].squadra=gioc.squadra
                 self.listaGiocatori[gioc.nome]=listaVecchia[i]

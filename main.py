@@ -2,6 +2,11 @@ from AstaManager import *
 from Calciatore import *
 from Movimento import *
 from Portiere import *
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+from testGUI import *
+
+
 
 if __name__=="__main__":
     manager=AstaManager();
@@ -22,25 +27,8 @@ if __name__=="__main__":
     listaP=manager.partecipanti()
 
 
-    while True:
-        quit=raw_input("Quit? y/n: ")
-        if quit=="y":
-            break
-        else:
-            for p in listaP.values():
-                print("Please " + p.nome +" is ur turn")
-                pick=raw_input("Seleziona giocatore: ")
-                money=int(raw_input("Costo: "))
-                if int(p.crediti)>int(money):
-                    manager.aquista(p,listaG[pick],money)
-                else:
-                    print("Error")
-
-
-
-    for x in listaG.values():
-        print(str(x.nome) + " " + str(x.venduto))
-
-    print("")
-    for x in listaP.values():
-        print(str(x.nome) + " "+ str(x.crediti))
+    #GUI
+    app = QtWidgets.QApplication(sys.argv)
+    w = Window()
+    w.show()
+    sys.exit(app.exec_())
