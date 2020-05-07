@@ -4,8 +4,8 @@ from Movimento import *
 from Portiere import *
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from testGUI import *
-
+from PyQt5.QtWidgets import QApplication
+import testGUI
 
 
 if __name__=="__main__":
@@ -25,10 +25,9 @@ if __name__=="__main__":
     manager.addPlayer("Eugi")
 
     listaP=manager.partecipanti()
-
+    test=[k for k in listaG.values()]
 
     #GUI
-    app = QtWidgets.QApplication(sys.argv)
-    w = Window()
-    w.show()
-    sys.exit(app.exec_())
+    App = QApplication(sys.argv)
+    window = testGUI.Window(test)
+    sys.exit(App.exec())
