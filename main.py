@@ -5,7 +5,9 @@ from Portiere import *
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QIcon
 import testGUI
+import os
 
 
 if __name__=="__main__":
@@ -25,9 +27,13 @@ if __name__=="__main__":
     manager.addPlayer("Eugi")
 
     listaP=manager.partecipanti()
-    test=[k for k in listaG.values()]
+
+
+
 
     #GUI
     App = QApplication(sys.argv)
-    window = testGUI.Window(test)
+    path=os.path.join(os.path.dirname(sys.modules[__name__].__file__),'x.jpg')
+    App.setWindowIcon(QIcon(path))
+    window = testGUI.Window(listaG,listaP)
     sys.exit(App.exec())

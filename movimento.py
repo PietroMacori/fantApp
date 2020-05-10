@@ -9,6 +9,7 @@ class Movimento(Calciatore):
         self.rigori=rigori
         self.gialli=gialli
         self.rossi=rossi
+        self.fv=fv
 
     def __str__(self):
-        return self.nome + " " + self.squadra
+        return self.nome + " " + self.squadra + " "+str(self.fv)

@@ -2,10 +2,11 @@ from PyQt5 import QtGui,QtCore
 from PyQt5.QtWidgets import QApplication, QWidget, QScrollArea,QHBoxLayout, QVBoxLayout, QGroupBox, QLabel, QPushButton, QFormLayout
 from PyQt5.QtCore import *
 import sys
+from functools import partial
 
 
 class Window(QWidget):
-    def __init__(self,listaG):
+    def __init__(self,listaG,listaP):
         super().__init__()
         #Window Settings
         self.title = "fantAsta"
@@ -25,8 +26,10 @@ class Window(QWidget):
 
         for i in range(len(listaG)):
             listPlayersButton.append(QPushButton(listaG[i].nome))
-            listPlayersButton[i].setFixedHeight(45)
+            listPlayersButton[i].setFixedHeight(35)
+            listPlayersButton[i].clicked.connect(partial(self.showInfoPlayer,listaG[i]))
             scrollLayout.addWidget(listPlayersButton[i])
+
         groupBox.setLayout(scrollLayout)
         scroll = QScrollArea()
         scroll.setWidget(groupBox)
@@ -39,23 +42,26 @@ class Window(QWidget):
         groupBoxLeft.setFixedHeight(800)
         groupBoxLeft.setFixedWidth(300)
         layoutLeft=QVBoxLayout()
-        bMante=QPushButton("Mante")
-        bPixy=QPushButton("Pixy")
-        bEugi=QPushButton("Eugi")
-        bCava=QPushButton("Cava")
+        listaPartecipantiButton = []
+        for i in range(len(listaP)):
+            listaPartecipantiButton.append(QPushButton(listaP[i].nome))
+            listaPartecipantiButton[i].setFixedHeight(78)
+            #listaPartecipantiButton[i].setStyleSheet('QPushButton {background-color: #DCDCDC}')
+            layoutLeft.addWidget(listaPartecipantiButton[i])
 
-        layoutLeft.addWidget(bMante)
-        layoutLeft.addWidget(bPixy)
-        layoutLeft.addWidget(bEugi)
-        layoutLeft.addWidget(bCava)
+
         groupBoxLeft.setLayout(layoutLeft)
 
         #Central Zone
+        layoutCentral=QVBoxLayout()
         groupBoxCentral=QGroupBox("Main")
         groupBoxCentral.setFixedHeight(800)
         groupBoxCentral.setFixedWidth(1000)
-        b=QPushButton("Cazzoooo")
-        b.setFixedWidth(500)
+        groupBoxCentral.setLayout(layoutCentral)
+
+        #b=QPushButton("Cazzoooo")
+
+        #layoutCentral.addWidget(b)
 
 
 
@@ -67,3 +73,6 @@ class Window(QWidget):
 
 
         self.show()
+
+    def showInfoPlayer(self, giocatore):
+        print(giocatore)

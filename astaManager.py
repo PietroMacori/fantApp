@@ -6,12 +6,12 @@ from Partecipante import *
 
 class AstaManager():
     def __init__(self):
-        self.listaPartecipanti={}
-        self.listaGiocatori={}
+        self.listaPartecipanti=[]
+        self.listaGiocatori=[]
 
     def loadPlayer(self,path1,path2):
-        listaVecchia=[]
-        listaNuova={}
+        listaVecchia={}
+        listaNuova=[]
         wb2=xlrd.open_workbook(path2)
         sheet2=wb2.sheet_by_index(0)
         sheet2.cell_value(0,0)
@@ -55,10 +55,10 @@ class AstaManager():
 
             if ruolo=="P":
                 newc=Portiere(nome,squadra,ruolo,presenze,fv,mv,rigoriParati,golSubiti)
-                listaVecchia.insert(i,newc)
+                listaVecchia[nome]=newc
             else:
                 newc=Movimento(nome,squadra,ruolo,presenze,fv,mv,gol,assist,rigoriCalciati,gialli,rossi)
-                listaVecchia.insert(i,newc)
+                listaVecchia[nome]=newc
 
 
         wb=xlrd.open_workbook(path1)
@@ -76,25 +76,25 @@ class AstaManager():
 
             if ruolo=="P":
                 newc=Portiere(nome,squadra,ruolo,0,0,0,0,0)
-                listaNuova[nome]=newc
+                listaNuova.append(newc)
             else:
                 newc=Movimento(nome,squadra,ruolo,0,0,0,0,0,0,0,0)
-                listaNuova[nome]=newc
+                listaNuova.append(newc)
 
-        #Remove players that are no more in Serie A and update teams
-        for i in range(len(listaVecchia)):
-
-            if listaVecchia[i].nome in listaNuova.keys():
-                gioc=listaNuova[listaVecchia[i].nome]
-                listaVecchia[i].squadra=gioc.squadra
-                self.listaGiocatori[gioc.nome]=listaVecchia[i]
-
+        self.listaGiocatori=listaNuova
+        for i in range(len(listaNuova)):
+            if listaNuova[i].nome in listaVecchia.keys():
+                t=listaNuova[i].squadra
+                self.listaGiocatori[i]=listaVecchia[listaNuova[i].nome]
+                self.listaGiocatori[i].squadra=t
+            else:
+                pass
 
         return self.listaGiocatori
 
 
     def addPlayer(self, nomePartecipante):
-        self.listaPartecipanti[nomePartecipante]=Partecipante(nomePartecipante)
+        self.listaPartecipanti.append(Partecipante(nomePartecipante))
 
     def partecipanti(self):
         return self.listaPartecipanti
