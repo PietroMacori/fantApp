@@ -34,6 +34,8 @@ if __name__=="__main__":
     #GUI
     App = QApplication(sys.argv)
     path=os.path.join(os.path.dirname(sys.modules[__name__].__file__),'x.png')
+    App.setApplicationName('FANTASTA')
+
     App.setWindowIcon(QIcon(path))
     window = testGUI.Window(listaG,listaP)
     sys.exit(App.exec())

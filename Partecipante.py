@@ -10,3 +10,10 @@ class Partecipante():
     def addPlayer(self,calciatore, crediti):
         self.listaAquisti.append(calciatore)
         self.crediti=self.crediti-crediti
+
+    def numeroRuolo(self,ruolo):
+        count=0
+        for i in self.listaAquisti:
+            if i.ruolo==ruolo:
+                count+=1
+        return count

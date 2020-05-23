@@ -10,6 +10,7 @@ class Calciatore():
         self.mv=mv
         self.venduto=False
         self.partecipante=""
+        self.costo=0
 
 
     def __str__(self):
